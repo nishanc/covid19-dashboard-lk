@@ -25,7 +25,7 @@
     </button>
     <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
       <ul class=" navbar-nav ml-auto">
-        <li class=" search-bar input-group">
+        <li class=" search-bar input-group" hidden>
           <button
             class=" btn btn-link"
             data-target="#searchModal"
@@ -45,38 +45,38 @@
             ngbDropdownToggle
           >
             <div class=" notification d-none d-lg-block d-xl-block"></div>
-            <i class=" tim-icons icon-sound-wave"> </i>
-            <p class=" d-lg-none">Notifications</p>
+            <i class=" tim-icons icon-bulb-63"> </i>
+            <p class=" d-lg-none">Links</p>
           </a>
           <ul class=" dropdown-menu-right dropdown-navbar" ngbDropdownMenu>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Mike John responded to your email
+              <a class=" nav-item" href="https://hpb.health.gov.lk/en/api-documentation" target="_blank" ngbDropdownItem>
+                Health Promotion Bureau API Dcumentation
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                You have 5 more tasks
+              <a class=" nav-item" href="https://experience.arcgis.com/experience/685d0ace521648f8a5beeeee1b9125cd" target="_blank" ngbDropdownItem>
+                World Situation
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Your friend Michael is in town
+              <a class=" nav-item" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/global-research-on-novel-coronavirus-2019-ncov" target="_blank" ngbDropdownItem>
+                Global Research
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Another notification
+              <a class=" nav-item" href="mailto:inbox.nishan@gmail.com?Subject=COVID-19%20Dashboard" ngbDropdownItem>
+                Contact Me
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Another one
+              <a class=" nav-item" href="mailto:inbox.nishan@gmail.com?Subject=REPORTING%20ABUSE" ngbDropdownItem>
+                Report Abuse
               </a>
             </li>
           </ul>
         </li>
-        <li class=" nav-item" ngbDropdown>
+        <li class=" nav-item" ngbDropdown hidden>
           <a
             class=" nav-link"
             data-toggle="dropdown"

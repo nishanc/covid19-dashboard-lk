@@ -6,27 +6,27 @@
         <div class=" card-header">
           <div class=" row">
             <div class=" col-sm-6 text-left">
-              <h5 class=" card-category">Total Shipments</h5>
-              <h2 class=" card-title">Performance</h2>
+              <h5 class=" card-category">Variability of</h5>
+              <h2 class=" card-title">Reported Cases</h2>
             </div>
             <div class=" col-sm-6">
               <div
                 class=" btn-group btn-group-toggle float-right"
                 data-toggle="buttons"
               >
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions(1);clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
                   <input checked="checked" name="options" type="radio" />
 
                   <span
                     class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
                   >
-                    Accounts
+                    Local Total
                   </span>
                   <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-single-02"> </i>
+                    <i class=" tim-icons icon-bank"> </i>
                   </span>
                 </label>
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[1];updateOptions();clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[1];updateOptions(2);clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
                   <input
                     class=" d-none d-sm-none"
                     name="options"
@@ -36,22 +36,22 @@
                   <span
                     class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
                   >
-                    Purchases
+                    Local New
                   </span>
                   <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-gift-2"> </i>
+                    <i class=" tim-icons icon-single-02"> </i>
                   </span>
                 </label>
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions();clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions(3);clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">
                   <input class=" d-none" name="options" type="radio" />
 
                   <span
                     class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
                   >
-                    Sessions
+                    Global Total
                   </span>
                   <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-tap-02"> </i>
+                    <i class=" tim-icons icon-globe-2"> </i>
                   </span>
                 </label>
               </div>
@@ -68,9 +68,9 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Total Shipments</h5>
+          <h5 class=" card-category">Local Deaths</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> 763,215
+            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> {{dataLocalDead}}
           </h3>
         </div>
         <div class=" card-body">
@@ -81,9 +81,9 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Daily Sales</h5>
+          <h5 class=" card-category">Locals In Hospitals</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-delivery-fast text-info"> </i> 3,500€
+            <i class=" tim-icons icon-single-02 text-info"> </i> {{dataLocalInHospitals}}
           </h3>
         </div>
         <div class=" card-body">
@@ -94,9 +94,9 @@
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Completed Tasks</h5>
+          <h5 class=" card-category">Local Recovered</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-send text-success"> </i> 12,100K
+            <i class=" tim-icons icon-heart-2 text-success"> </i> {{dataLocalRec}}
           </h3>
         </div>
         <div class=" card-body">
@@ -106,7 +106,7 @@
     </div>
   </div>
   <div class=" row">
-    <div class=" col-lg-6 col-md-12">
+    <!-- <div class=" col-lg-6 col-md-12">
       <div class=" card card-tasks">
         <div class=" card-header">
           <h6 class=" title d-inline">Tasks(5)</h6>
@@ -314,65 +314,29 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class=" col-lg-6 col-md-12">
+    </div> -->
+    <div class=" col-lg-12 col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Simple Table</h4>
+          <h4 class=" card-title">Hospital Summary</h4>
         </div>
         <div class=" card-body">
           <div class=" table-responsive">
             <table class=" table tablesorter" id="">
               <thead class=" text-primary">
                 <tr>
-                  <th>Name</th>
-                  <th>Country</th>
-                  <th>City</th>
-                  <th class=" text-center">Salary</th>
+                  <th>Name of the Hospital</th>
+                  <th>Local Count</th>
+                  <th>Foreign Count</th>
+                  <th class=" text-center">Total</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Dakota Rice</td>
-                  <td>Niger</td>
-                  <td>Oud-Turnhout</td>
-                  <td class=" text-center">$36,738</td>
-                </tr>
-                <tr>
-                  <td>Minerva Hooper</td>
-                  <td>CuraÃ§ao</td>
-                  <td>Sinaai-Waas</td>
-                  <td class=" text-center">$23,789</td>
-                </tr>
-                <tr>
-                  <td>Sage Rodriguez</td>
-                  <td>Netherlands</td>
-                  <td>Baileux</td>
-                  <td class=" text-center">$56,142</td>
-                </tr>
-                <tr>
-                  <td>Philip Chaney</td>
-                  <td>Korea, South</td>
-                  <td>Overland Park</td>
-                  <td class=" text-center">$38,735</td>
-                </tr>
-                <tr>
-                  <td>Doris Greene</td>
-                  <td>Malawi</td>
-                  <td>Feldkirchen in KÃ¤rnten</td>
-                  <td class=" text-center">$63,542</td>
-                </tr>
-                <tr>
-                  <td>Mason Porter</td>
-                  <td>Chile</td>
-                  <td>Gloucester</td>
-                  <td class=" text-center">$78,615</td>
-                </tr>
-                <tr>
-                  <td>Jon Porter</td>
-                  <td>Portugal</td>
-                  <td>Gloucester</td>
-                  <td class=" text-center">$98,615</td>
+                <tr *ngFor="let hospital of hospitals">
+                  <td>{{hospital.hospital.name}} ({{hospital.hospital.name_si}})</td>
+                  <td>{{hospital.cumulative_local}}</td>
+                  <td>{{hospital.cumulative_foreign}}</td>
+                  <td class=" text-center">{{hospital.cumulative_total}}</td>
                 </tr>
               </tbody>
             </table>

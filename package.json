@@ -4,12 +4,13 @@
   "description": "Black Dasboard Angular, a Creative Tim Desgin. Coded by Creative Tim",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "postinstall": "ng build --aot --prod"
   },
   "repository": {
     "type": "git",
@@ -73,7 +74,10 @@
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
     "chart.js": "2.8.0",
     "core-js": "3.6.4",
+    "express": "^4.17.1",
+    "ng-http-loader": "^7.0.0",
     "ngx-toastr": "10.0.4",
+    "path": "^0.12.7",
     "rxjs": "6.5.2",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
@@ -98,5 +102,9 @@
     "ts-node": "8.6.2",
     "tslint": "6.0.0",
     "typescript": "3.7.5"
+  },
+  "engines": {
+    "node": "~12.16.1",
+    "npm": "~6.13.4"
   }
 }
