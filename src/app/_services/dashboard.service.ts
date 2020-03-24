@@ -19,7 +19,7 @@ export class DashboardService {
     let options = null;
     const headers = new HttpHeaders({'Content-type': 'application/json'});
     options = { headers };
-    return this.http.get<ApiResponse[]>(this.base + 'all/12', options).pipe(map(response => response))
+    return this.http.get<ApiResponse[]>(this.base + 'all/15', options).pipe(map(response => response))
     .pipe(
       catchError(this.handleError)
     );
