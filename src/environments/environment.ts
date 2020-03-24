@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'https://hpb.health.gov.lk/api/get-current-statistical',
-  apiUrl: 'http://127.0.0.1:5000/',
+  apiUrl: 'https://covid19-lk.herokuapp.com/',
 };
 
 /*
