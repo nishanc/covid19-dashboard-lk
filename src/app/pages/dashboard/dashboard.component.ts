@@ -543,7 +543,7 @@ export class DashboardComponent implements OnInit {
       this.dataLocalRecRate = (this.lastrecord[0].local_recovered / this.lastrecord[0].local_total_cases) * 100.0;
       this.dataGlobalMor = (this.lastrecord[0].global_deaths / this.lastrecord[0].global_total_cases) * 100.0;
       this.dataLocalMor = (this.lastrecord[0].local_deaths / this.lastrecord[0].local_total_cases) * 100.0;
-      this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span>'+ this.lastrecord[0].local_recovered +'<b> Recovered.', '', {
+      this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span><b>'+ this.lastrecord[0].local_recovered +' Recovered</b>', '', {
         // disableTimeOut: true,
         closeButton: false,
         enableHtml: true,
@@ -551,7 +551,7 @@ export class DashboardComponent implements OnInit {
         toastClass: "alert alert-success alert-with-icon",
         positionClass: 'toast-top-center'
       });
-      this.toastr.warning('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span>'+ this.lastrecord[0].local_deaths +'<b> Deaths</b>.', '', {
+      this.toastr.warning('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span><b>'+ this.lastrecord[0].local_deaths +' Deaths</b>', '', {
         // disableTimeOut: true,
         closeButton: false,
         enableHtml: true,
