@@ -31,7 +31,9 @@ export class DashboardComponent implements OnInit {
   dataLocalDead: number;
   dataSetLocalInHospitals = [];
   dataLocalInHospitals: number;
-
+  dataLocalRecRate: number;
+  dataGlobalMor: number;
+  dataLocalMor: number;
   constructor(private toastr: ToastrService, private dashboardService: DashboardService) {}
 
   public getDataAll(){
@@ -40,7 +42,7 @@ export class DashboardComponent implements OnInit {
       // console.log(this.apiresponse[0].update_date_time)
       this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Welcome to <b>COVID-19 Sri Lanka Dashboard</b>.', '', {
         // disableTimeOut: true,
-        closeButton: true,
+        closeButton: false,
         enableHtml: true,
         timeOut: 3000,
         toastClass: "alert alert-success alert-with-icon",
@@ -190,6 +192,7 @@ export class DashboardComponent implements OnInit {
         scales: {
           yAxes: [{
             barPercentage: 1.6,
+            position: 'right',
             gridLines: {
               drawBorder: false,
               color: 'rgba(29,140,248,0.0)',
@@ -286,6 +289,7 @@ export class DashboardComponent implements OnInit {
         scales: {
           yAxes: [{
             barPercentage: 1.6,
+            position: 'right',
             gridLines: {
               drawBorder: false,
               color: 'rgba(29,140,248,0.0)',
@@ -334,7 +338,7 @@ export class DashboardComponent implements OnInit {
         responsive: true,
         scales: {
           yAxes: [{
-  
+            position: 'right',
             gridLines: {
               drawBorder: false,
               color: 'rgba(29,140,248,0.1)',
@@ -373,7 +377,7 @@ export class DashboardComponent implements OnInit {
       gradientStroke.addColorStop(0, 'rgba(233,32,16,0)'); //red colors
   
       var data = {
-        labels: this.labels,
+        labels: this.labels.reverse(),
         datasets: [{
           label: "Count",
           fill: true,
@@ -389,7 +393,7 @@ export class DashboardComponent implements OnInit {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: this.dataSetLocalDead,
+          data: this.dataSetLocalDead.reverse(),
         }]
       };
   
@@ -427,7 +431,7 @@ export class DashboardComponent implements OnInit {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data:  this.dataSetLocalRec,
+          data:  this.dataSetLocalRec.reverse(),
         }]
       };
   
@@ -442,9 +446,9 @@ export class DashboardComponent implements OnInit {
       if(chart_labels != []) {
         // console.log(chart_labels)
         this.datasets = [
-          this.dataSetLocalTotal,
-          this.dataSetLocalNew,
-          this.dataSetGlobalTotal
+          this.dataSetLocalTotal.reverse(),
+          this.dataSetLocalNew.reverse(),
+          this.dataSetGlobalTotal.reverse()
           
         ];
         this.data = this.datasets[0];
@@ -513,7 +517,7 @@ export class DashboardComponent implements OnInit {
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: this.dataSetLocalInHospitals,
+            data: this.dataSetLocalInHospitals.reverse(),
           }]
         },
         options: gradientBarChartConfiguration
@@ -536,6 +540,25 @@ export class DashboardComponent implements OnInit {
       // console.log(this.lastrecord[0])
       this.hospitals = this.lastrecord[0].hospital_data;
       // console.log(this.hospitals[0].hospital.name_si)
+      this.dataLocalRecRate = (this.lastrecord[0].local_recovered / this.lastrecord[0].local_total_cases) * 100.0;
+      this.dataGlobalMor = (this.lastrecord[0].global_deaths / this.lastrecord[0].global_total_cases) * 100.0;
+      this.dataLocalMor = (this.lastrecord[0].local_deaths / this.lastrecord[0].local_total_cases) * 100.0;
+      this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span>'+ this.lastrecord[0].local_recovered +'<b> Recovered.', '', {
+        // disableTimeOut: true,
+        closeButton: false,
+        enableHtml: true,
+        timeOut: 3000,
+        toastClass: "alert alert-success alert-with-icon",
+        positionClass: 'toast-top-center'
+      });
+      this.toastr.warning('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span>'+ this.lastrecord[0].local_deaths +'<b> Deaths</b>.', '', {
+        // disableTimeOut: true,
+        closeButton: false,
+        enableHtml: true,
+        timeOut: 3000,
+        toastClass: "alert alert-warning alert-with-icon",
+        positionClass: 'toast-top-center'
+      });
     }, error => {
       this.toastr.error('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span>Oh no!</b> - something went wrong.', '', {
         disableTimeOut: true,
@@ -560,7 +583,7 @@ export class DashboardComponent implements OnInit {
     if(btn == 1) {
       this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Local Total Cases</b>', '', {
         // disableTimeOut: true,
-        closeButton: true,
+        closeButton: false,
         enableHtml: true,
         timeOut: 2000,
         toastClass: "alert alert-info alert-with-icon",
@@ -570,7 +593,7 @@ export class DashboardComponent implements OnInit {
     else if(btn == 2) {
       this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Local New Cases</b>', '', {
         // disableTimeOut: true,
-        closeButton: true,
+        closeButton: false,
         enableHtml: true,
         timeOut: 2000,
         toastClass: "alert alert-info alert-with-icon",
@@ -584,7 +607,7 @@ export class DashboardComponent implements OnInit {
       else {
         this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Global Total Cases</b>', '', {
           // disableTimeOut: true,
-          closeButton: true,
+          closeButton: false,
           enableHtml: true,
           timeOut: 2000,
           toastClass: "alert alert-info alert-with-icon",
