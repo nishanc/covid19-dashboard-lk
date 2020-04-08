@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   public clicked2: boolean = false;
   public clickedOnce: boolean = false;
   apiresponse: ApiResponse[];
+  trimmedresponse: ApiResponse[];
   lastrecord: ApiResponse; 
   hospitals: HospitalData[];
   labels = [];
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit {
   dataLocalRecRate: number;
   dataGlobalMor: number;
   dataLocalMor: number;
+  uniqueDate: string;
   constructor(private toastr: ToastrService, private dashboardService: DashboardService) {}
 
   public getDataAll(){
@@ -48,30 +50,68 @@ export class DashboardComponent implements OnInit {
         toastClass: "alert alert-success alert-with-icon",
         positionClass: 'toast-top-center'
       });
-
+      console.log(this.apiresponse.length)
       for (var item of this.apiresponse) {
-        // console.log(item.update_date_time)
-        let labelArr = [];
-        var dateL = new Date(item.update_date_time).toLocaleDateString('en-US', {
+        var date = new Date(item.update_date_time).toLocaleDateString('en-US', {
           day: '2-digit',
           month: '2-digit',
+          year: '2-digit'
         })
-        var timeL = new Date(item.update_date_time).toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-        // console.log(dateL);
-        // console.log(timeL);
-        labelArr.push(dateL)
-        labelArr.push(timeL)
-        this.labels.push(labelArr)
-        this.dataSetLocalTotal.push(item?.local_total_cases)
-        this.dataSetGlobalTotal.push(item?.global_total_cases)
-        this.dataSetLocalNew.push(item?.local_new_cases)
-        this.dataSetLocalRec.push(item?.local_recovered)
-        this.dataSetLocalDead.push(item?.local_deaths)
-        this.dataSetLocalInHospitals.push(item?.local_total_number_of_individuals_in_hospitals)
+        if(date != this.uniqueDate){
+          this.uniqueDate = date
+          // console.log("true")
+          // console.log(this.uniqueDate)
+          // console.log(item)
+          // this.trimmedresponse.push(item);
+          // console.log(item.update_date_time)
+          let labelArr = [];
+          var dateL = new Date(item.update_date_time).toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+          })
+          var timeL = new Date(item.update_date_time).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+          })
+          // console.log(dateL);
+          // console.log(timeL);
+          labelArr.push(dateL)
+          labelArr.push(timeL)
+          this.labels.push(dateL)
+          this.dataSetLocalTotal.push(item?.local_total_cases)
+          this.dataSetGlobalTotal.push(item?.global_total_cases)
+          this.dataSetLocalNew.push(item?.local_new_cases)
+          this.dataSetLocalRec.push(item?.local_recovered)
+          this.dataSetLocalDead.push(item?.local_deaths)
+          this.dataSetLocalInHospitals.push(item?.local_total_number_of_individuals_in_hospitals)
+        }
+        
       }
+
+      // for (var item of this.trimmedresponse) {
+      //   // console.log(item.update_date_time)
+      //   let labelArr = [];
+      //   var dateL = new Date(item.update_date_time).toLocaleDateString('en-US', {
+      //     day: '2-digit',
+      //     month: '2-digit',
+      //   })
+      //   var timeL = new Date(item.update_date_time).toLocaleTimeString('en-US', {
+      //     hour: '2-digit',
+      //     minute: '2-digit'
+      //   })
+      //   // console.log(dateL);
+      //   // console.log(timeL);
+      //   labelArr.push(dateL)
+      //   labelArr.push(timeL)
+      //   this.labels.push(labelArr)
+      //   this.dataSetLocalTotal.push(item?.local_total_cases)
+      //   this.dataSetGlobalTotal.push(item?.global_total_cases)
+      //   this.dataSetLocalNew.push(item?.local_new_cases)
+      //   this.dataSetLocalRec.push(item?.local_recovered)
+      //   this.dataSetLocalDead.push(item?.local_deaths)
+      //   this.dataSetLocalInHospitals.push(item?.local_total_number_of_individuals_in_hospitals)
+      // }
+      // console.log(this.dataSetLocalTotal)
       this.dataLocalRec = this.dataSetLocalRec[0];
       this.dataLocalDead = this.dataSetLocalDead[0];
       this.dataLocalInHospitals = this.dataSetLocalInHospitals[0];
